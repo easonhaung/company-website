@@ -110,6 +110,70 @@ export default function HomePage() {
           </div>
         </Container>
       </section>
+
+      {/* 落地實績：康科科技 */}
+      <section className="w-full bg-slate-950 text-white">
+        <Container className="py-16 md:py-20">
+          <div className="flex flex-col gap-10 md:grid md:grid-cols-2 md:items-center">
+            <div className="relative w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-800">
+              <Image
+                src="/kank-landing.png.png"
+                alt="康科科技 KANK 模組化電動滑板車落地實績"
+                width={1024}
+                height={350}
+                className="w-full h-auto"
+                priority
+              />
+            </div>
+
+            <div>
+              <p className="text-sm font-medium tracking-[0.2em] text-cyan-300 mb-3">
+                落地實績
+              </p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                康科科技：模組化電動滑板車移動方案
+              </h2>
+              <p className="text-slate-300 text-sm md:text-base leading-relaxed mb-4">
+                康科科技（KANK）專注於開發模組化電動滑板車，透過可更換模組與多元應用，
+                提供具永續價值的移動解決方案。我們協助其在實際場域中導入並驗證震動電能回收技術，
+                並針對不同應用情境進行系統整合與數據分析。
+              </p>
+              <div className="grid gap-4 text-sm md:text-base mb-6">
+                <div>
+                  <h3 className="font-semibold mb-1 text-white">合作內容</h3>
+                  <ul className="list-disc list-inside text-slate-300 space-y-1">
+                    <li>車用電池系統震動電能回收模組導入與整合評估</li>
+                    <li>實車道路測試與關鍵效能指標蒐集</li>
+                    <li>多模組載具情境（標準版、載籃模組、輪椅連接模組等）驗證建議</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-1 text-white">實際成果</h3>
+                  <ul className="list-disc list-inside text-slate-300 space-y-1">
+                    <li>建立可重複量測的實測流程與報表格式</li>
+                    <li>找出適合量產前調校的關鍵工況與參數</li>
+                    <li>支援後續與公部門及產業夥伴合作的技術佐證</li>
+                  </ul>
+                </div>
+              </div>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/technology"
+                  className="inline-flex items-center px-5 py-2.5 rounded-lg bg-cyan-500 text-sm font-medium text-white hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/25"
+                >
+                  了解技術應用
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center px-5 py-2.5 rounded-lg border border-slate-600 text-sm font-medium text-slate-100 hover:bg-slate-900 transition"
+                >
+                  與我們討論落地計畫
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
     </>
   );
 }

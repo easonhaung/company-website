@@ -24,8 +24,8 @@ export function SiteHeader() {
               </Link>
             </li>
             <li>
-              <Link href="/product" className="hover:text-slate-900">
-                產品／解決方案
+              <Link href="/news" className="hover:text-slate-900">
+                最新消息
               </Link>
             </li>
             <li>
@@ -34,8 +34,8 @@ export function SiteHeader() {
               </Link>
             </li>
             <li>
-              <Link href="/news" className="hover:text-slate-900">
-                最新消息
+              <Link href="/product" className="hover:text-slate-900">
+                產品／解決方案
               </Link>
             </li>
             <li>
