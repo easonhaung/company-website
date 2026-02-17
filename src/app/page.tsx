@@ -1,9 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/Container";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 import { IconPoC, IconData, IconIntegrate } from "@/components/Icons";
+import { getNewsList } from "@/lib/news";
 
 export default function HomePage() {
+  const newsItems = getNewsList().slice(0, 4);
   return (
     <>
       {/* Hero: 全寬、科技風背景 */}
@@ -39,41 +42,46 @@ export default function HomePage() {
         </div>
 
         <div className="relative z-10 w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 drop-shadow-lg">
-            EZeeTech
-          </h1>
-          <p className="text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed mb-4">
-            專注於車用電池系統之震動電能回收技術，
-            提供領先的車用應用驗證與試點解決方案。
-          </p>
-          <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base mb-10">
-            與公部門及產業夥伴合作，透過實地測試、試點計畫與數據驗證，
-            讓創新技術真正落地、可評估、可擴展。
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link
-              href="/contact"
-              className="px-6 py-3 bg-cyan-500 text-white font-medium rounded-lg hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/25"
-            >
-              聯絡我們
-            </Link>
-            <Link
-              href="/news"
-              className="px-6 py-3 bg-white/10 text-white font-medium rounded-lg border border-white/30 hover:bg-white/20 transition backdrop-blur-sm"
-            >
-              最新消息
-            </Link>
-          </div>
+          <AnimateOnScroll animation="fade-up">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 drop-shadow-lg">
+              EZeeTech
+            </h1>
+            <p className="text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed mb-4">
+              專注於車用電池系統之震動電能回收技術，
+              提供領先的車用應用驗證與試點解決方案。
+            </p>
+            <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base mb-10">
+              與公部門及產業夥伴合作，透過實地測試、試點計畫與數據驗證，
+              讓創新技術真正落地、可評估、可擴展。
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Link
+                href="/contact"
+                className="px-6 py-3 bg-cyan-500 text-white font-medium rounded-lg hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/25"
+              >
+                聯絡我們
+              </Link>
+              <Link
+                href="/news"
+                className="px-6 py-3 bg-white/10 text-white font-medium rounded-lg border border-white/30 hover:bg-white/20 transition backdrop-blur-sm"
+              >
+                最新消息
+              </Link>
+            </div>
+          </AnimateOnScroll>
         </div>
       </section>
 
       {/* 主要服務重點：全寬區塊 */}
       <section className="w-full bg-slate-50 border-t border-slate-200">
         <Container className="py-16 md:py-20">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-10 text-center">
-            主要服務重點
-          </h2>
+          <AnimateOnScroll animation="fade-up">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-10 text-center">
+              主要服務重點
+            </h2>
+          </AnimateOnScroll>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <AnimateOnScroll animation="fade-up" delay={0}>
             <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition">
               <div className="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center mb-4 text-cyan-600">
                 <IconPoC className="w-6 h-6" />
@@ -85,6 +93,8 @@ export default function HomePage() {
                 在實際場域驗證技術可行性，產出可量測數據與評估報告。
               </p>
             </div>
+            </AnimateOnScroll>
+            <AnimateOnScroll animation="fade-up" delay={100}>
             <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition">
               <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mb-4 text-slate-600">
                 <IconData className="w-6 h-6" />
@@ -96,6 +106,8 @@ export default function HomePage() {
                 系統化蒐集與分析關鍵效能指標，支援決策與優化。
               </p>
             </div>
+            </AnimateOnScroll>
+            <AnimateOnScroll animation="fade-up" delay={200}>
             <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition">
               <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mb-4 text-slate-600">
                 <IconIntegrate className="w-6 h-6" />
@@ -107,17 +119,90 @@ export default function HomePage() {
                 評估與既有系統、流程整合的可行性，降低部署風險。
               </p>
             </div>
+            </AnimateOnScroll>
           </div>
+        </Container>
+      </section>
+
+      {/* 最新消息 */}
+      <section className="w-full bg-white border-t border-slate-200">
+        <Container className="py-16 md:py-20">
+          <AnimateOnScroll animation="fade-up">
+            <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-10 text-center">
+              最新消息
+            </h2>
+          </AnimateOnScroll>
+          {newsItems.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {newsItems.map(({ slug, meta }, index) => (
+                <AnimateOnScroll key={slug} animation="fade-up" delay={index * 80}>
+                  <Link
+                    href={`/news/${slug}`}
+                    className="block bg-white rounded-xl border border-slate-100 hover:border-slate-200 hover:shadow-lg transition overflow-hidden h-full flex flex-col"
+                  >
+                    <div className="aspect-[4/3] bg-slate-100 overflow-hidden">
+                      {meta.image ? (
+                        <Image
+                          src={meta.image}
+                          alt={meta.title}
+                          width={400}
+                          height={300}
+                          className="w-full h-full object-cover object-top"
+                        />
+                      ) : (
+                        <div
+                          className="w-full h-full bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center"
+                          aria-hidden
+                        >
+                          <span className="text-slate-400 text-4xl font-light">
+                            EZ
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-5 flex flex-col flex-1 min-h-[180px]">
+                      <h3 className="text-base font-semibold text-slate-900 line-clamp-2 mb-2">
+                        {meta.title}
+                      </h3>
+                      {meta.excerpt && (
+                        <p className="text-slate-600 text-sm leading-relaxed line-clamp-2 flex-1">
+                          {meta.excerpt}
+                        </p>
+                      )}
+                      <span className="mt-4 inline-flex items-center text-cyan-600 text-sm font-medium hover:text-cyan-500 transition">
+                        閱讀更多 →
+                      </span>
+                    </div>
+                  </Link>
+                </AnimateOnScroll>
+              ))}
+            </div>
+          ) : (
+            <AnimateOnScroll animation="fade-up">
+              <p className="text-slate-600 text-center">目前尚無消息。</p>
+            </AnimateOnScroll>
+          )}
+          {newsItems.length > 0 && (
+            <AnimateOnScroll animation="fade-up" className="text-center mt-10">
+              <Link
+                href="/news"
+                className="inline-flex px-6 py-3 rounded-lg border border-cyan-500 text-cyan-600 font-medium hover:bg-cyan-50 transition"
+              >
+                查看全部消息
+              </Link>
+            </AnimateOnScroll>
+          )}
         </Container>
       </section>
 
       {/* 落地實績：康科科技 */}
       <section className="w-full bg-slate-950 text-white">
         <Container className="py-16 md:py-20">
+          <AnimateOnScroll animation="fade-up">
           <div className="flex flex-col gap-10 md:grid md:grid-cols-2 md:items-center">
             <div className="relative w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-800">
               <Image
-                src="/kank-landing.png.png"
+                src="/news/kank-landing.png"
                 alt="康科科技 KANK 模組化電動滑板車落地實績"
                 width={1024}
                 height={350}
@@ -172,6 +257,7 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+          </AnimateOnScroll>
         </Container>
       </section>
     </>

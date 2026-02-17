@@ -9,11 +9,11 @@ export function SiteHeader() {
         <nav className="flex flex-wrap items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-3">
             <Image
-              src="/logo.png"
+              src="/news/logo.png"
               alt="EZeeTech"
-              width={120}
-              height={40}
-              className="h-8 w-auto object-contain"
+              width={180}
+              height={60}
+              className="h-12 w-auto object-contain"
               priority
             />
           </Link>

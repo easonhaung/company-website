@@ -1,5 +1,6 @@
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 
 export default function TechnologyPage() {
   return (
@@ -10,6 +11,7 @@ export default function TechnologyPage() {
       />
       <section className="w-full bg-white">
         <Container className="py-12 md:py-16">
+          <AnimateOnScroll animation="fade-up">
           <blockquote className="border-l-4 border-cyan-500 bg-slate-50 rounded-r-lg py-4 px-6 mb-10 text-slate-700 italic max-w-4xl">
             我們的「領先」來自於實地測試經驗、系統整合能力與數據驗證成果，
             而非僅止於實驗室條件下的理論表現。
@@ -26,6 +28,7 @@ export default function TechnologyPage() {
           <p className="text-slate-600 leading-relaxed max-w-4xl">
             此作法可協助決策者在導入前即掌握真實運作數據，降低不確定性並提升後續擴大部署的成功率。
           </p>
+          </AnimateOnScroll>
         </Container>
       </section>
     </>

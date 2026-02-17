@@ -1,5 +1,6 @@
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 
 export default function ProductPage() {
   return (
@@ -10,6 +11,7 @@ export default function ProductPage() {
       />
       <section className="w-full">
         <Container className="py-12 md:py-16">
+          <AnimateOnScroll animation="fade-up">
           <div className="max-w-4xl space-y-6 text-slate-600 leading-relaxed">
             <p>
               EZeeTech 聚焦於車用電池相關之震動電能回收技術，
@@ -32,6 +34,7 @@ export default function ProductPage() {
               而非僅止於實驗室條件下的理論表現。
             </blockquote>
           </div>
+          </AnimateOnScroll>
         </Container>
       </section>
     </>

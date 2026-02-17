@@ -85,6 +85,23 @@ EZeeTech 於今日與 **某某單位** 簽署合作備忘錄。
 
 這樣這則消息裡就會顯示該張圖。
 
+### 兩張照片並排（統一尺寸）
+
+若文章有**兩張照片**並排，請用 `<TwoPhotoGrid>` 元件，兩張圖會統一 4:3 比例、object-cover 填滿，並保留圖片說明：
+
+```mdx
+<TwoPhotoGrid
+  leftSrc="/news/左圖.jpg"
+  leftAlt="左圖替代文字"
+  leftCaption="左圖說明"
+  rightSrc="/news/右圖.jpg"
+  rightAlt="右圖替代文字"
+  rightCaption="右圖說明"
+/>
+```
+
+可參考 `2025-10-29-SHINE-STAR-AWARD.mdx` 或 `2025-11-21-youth-competition-champion.mdx`。
+
 ---
 
 有問題可以對照現有檔案，例如：`2026-04-30-u-start-pesa-01.mdx`。

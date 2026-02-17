@@ -1,6 +1,7 @@
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "@/components/ContactForm";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 
 export default function ContactPage() {
   return (
@@ -11,6 +12,7 @@ export default function ContactPage() {
       />
       <section className="w-full bg-white">
         <Container className="py-12 md:py-16">
+          <AnimateOnScroll animation="fade-up">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <ContactForm />
@@ -51,6 +53,7 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
+          </AnimateOnScroll>
         </Container>
       </section>
     </>

@@ -39,3 +39,25 @@
 .prose img {
   @apply block mx-auto my-6;
 }
+
+/* Scroll-triggered animations (參考 2026 高雄創業投資 DEMO DAY 風格) */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+}
+
+.animate-on-scroll.animate-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animate-on-scroll.fade-in {
+  transform: none;
+}
+
+.animate-on-scroll.fade-in.animate-visible {
+  transform: none;
+}

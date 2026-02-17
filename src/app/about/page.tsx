@@ -1,5 +1,6 @@
 import { Container } from "@/components/Container";
 import { PageHero } from "@/components/PageHero";
+import { AnimateOnScroll } from "@/components/AnimateOnScroll";
 
 export default function AboutPage() {
   return (
@@ -10,6 +11,7 @@ export default function AboutPage() {
       />
       <section className="w-full bg-white">
         <Container className="py-12 md:py-16">
+          <AnimateOnScroll animation="fade-up">
           <article className="max-w-4xl space-y-6 text-slate-600 leading-relaxed">
             <p>
               EZeeTech 的故事，並不是從會議室或商業簡報開始的。
@@ -49,6 +51,7 @@ export default function AboutPage() {
               這，就是 EZeeTech。
             </p>
           </article>
+          </AnimateOnScroll>
         </Container>
       </section>
     </>
