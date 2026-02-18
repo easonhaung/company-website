@@ -20,15 +20,15 @@ export default function NewsPage() {
               <p className="text-slate-600">目前尚無消息。</p>
             </AnimateOnScroll>
           ) : (
-            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 min-w-0 items-stretch">
               {items.map(({ slug, meta }, index) => (
-                <li key={slug}>
-                  <AnimateOnScroll animation="fade-up" delay={index * 80}>
+                <li key={slug} className="min-h-0">
+                  <AnimateOnScroll animation="fade-up" delay={index * 80} className="h-full min-h-0">
                     <Link
                       href={`/news/${slug}`}
                       className="block bg-white rounded-xl border border-slate-100 hover:border-slate-200 hover:shadow-lg transition overflow-hidden h-full flex flex-col"
                     >
-                      <div className="aspect-[4/3] bg-slate-100 overflow-hidden">
+                      <div className="aspect-video bg-slate-100 overflow-hidden shrink-0">
                         {meta.image ? (
                           <Image
                             src={meta.image}
@@ -48,7 +48,7 @@ export default function NewsPage() {
                           </div>
                         )}
                       </div>
-                      <div className="p-5 flex flex-col flex-1 min-h-[180px]">
+                      <div className="p-5 flex flex-col flex-1 min-h-[160px]">
                         {meta.date && (
                           <time className="text-sm text-slate-500 mb-2 block">
                             {meta.date}

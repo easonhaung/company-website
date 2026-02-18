@@ -32,7 +32,7 @@ export function ContactForm() {
     <form
       ref={formRef}
       onSubmit={handleSubmit}
-      className="space-y-5 max-w-xl"
+      className="space-y-5 w-full max-w-xl min-w-0"
     >
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">

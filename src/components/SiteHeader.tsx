@@ -6,7 +6,7 @@ export function SiteHeader() {
   return (
     <header className="border-b border-slate-200 bg-white">
       <Container className="py-4">
-        <nav className="flex flex-wrap items-center justify-between gap-4">
+        <nav className="flex flex-wrap items-center justify-between gap-3 sm:gap-4">
           <Link href="/" className="flex items-center gap-3">
             <Image
               src="/news/logo.png"
@@ -17,7 +17,7 @@ export function SiteHeader() {
               priority
             />
           </Link>
-          <ul className="flex flex-wrap gap-6 text-sm text-slate-600">
+          <ul className="flex flex-wrap gap-4 sm:gap-6 text-sm text-slate-600">
             <li>
               <Link href="/" className="hover:text-slate-900">
                 首頁

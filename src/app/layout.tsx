@@ -1,7 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 export const metadata: Metadata = {
   title: "EZeeTech",
@@ -16,9 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-TW">
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col w-full min-w-0 overflow-x-hidden">
         <SiteHeader />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 w-full min-w-0">{children}</main>
         <SiteFooter />
       </body>
     </html>

@@ -13,7 +13,7 @@ export default function ContactPage() {
       <section className="w-full bg-white">
         <Container className="py-12 md:py-16">
           <AnimateOnScroll animation="fade-up">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 min-w-0">
             <div className="lg:col-span-2">
               <ContactForm />
             </div>

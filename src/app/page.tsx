@@ -9,8 +9,8 @@ export default function HomePage() {
   const newsItems = getNewsList().slice(0, 4);
   return (
     <>
-      {/* Hero: 全寬、科技風背景 */}
-      <section className="relative w-full min-h-[75vh] flex items-center justify-center overflow-hidden">
+      {/* Hero: 全寬、16:9 比例、科技風背景 */}
+      <section className="relative w-full aspect-[16/9] min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center overflow-hidden">
         {/* 背景圖：科技感 */}
         <div className="absolute inset-0 bg-slate-950">
           <div className="relative w-full h-full">
@@ -27,48 +27,56 @@ export default function HomePage() {
             className="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-900/60 to-slate-950"
             aria-hidden
           />
-          {/* 幾何網格裝飾 */}
+          {/* 會動的網格背景（向下斜向滾動） */}
           <div
-            className="absolute inset-0 opacity-[0.08]"
+            className="absolute inset-0 hero-grid-animate opacity-80"
             style={{
               backgroundImage: `
-                linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px)
+                linear-gradient(rgba(6,182,212,.2) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(6,182,212,.2) 1px, transparent 1px)
               `,
               backgroundSize: "60px 60px",
             }}
             aria-hidden
           />
+          {/* 流動光帶（明顯橫向移動） */}
+          <div
+            className="absolute inset-0 opacity-30 hero-shimmer-layer"
+            style={{
+              background: "linear-gradient(90deg, transparent 0%, rgba(6,182,212,0.15) 25%, rgba(6,182,212,0.25) 50%, rgba(6,182,212,0.15) 75%, transparent 100%)",
+              backgroundSize: "200% 100%",
+              animation: "hero-shimmer 6s linear infinite",
+            }}
+            aria-hidden
+          />
         </div>
 
-        <div className="relative z-10 w-full max-w-[1400px] px-4 sm:px-6 lg:px-8 py-20 text-center">
-          <AnimateOnScroll animation="fade-up">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 drop-shadow-lg">
+        <div className="relative z-10 w-full max-w-[1400px] min-w-0 px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 text-center">
+          <h1 className="hero-title-animate text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 drop-shadow-lg" style={{ textShadow: "0 0 40px rgba(6,182,212,0.3)" }}>
               EZeeTech
             </h1>
-            <p className="text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed mb-4">
+            <p className="hero-desc-1 text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed mb-4">
               專注於車用電池系統之震動電能回收技術，
               提供領先的車用應用驗證與試點解決方案。
             </p>
-            <p className="text-slate-400 max-w-xl mx-auto text-sm sm:text-base mb-10">
+            <p className="hero-desc-2 text-slate-400 max-w-xl mx-auto text-sm sm:text-base mb-10">
               與公部門及產業夥伴合作，透過實地測試、試點計畫與數據驗證，
               讓創新技術真正落地、可評估、可擴展。
             </p>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="hero-buttons flex flex-wrap gap-4 justify-center">
               <Link
                 href="/contact"
-                className="px-6 py-3 bg-cyan-500 text-white font-medium rounded-lg hover:bg-cyan-400 transition shadow-lg shadow-cyan-500/25"
+                className="hero-btn-primary px-6 py-3 bg-cyan-500 text-white font-medium rounded-lg hover:bg-cyan-400 shadow-lg shadow-cyan-500/25"
               >
                 聯絡我們
               </Link>
               <Link
                 href="/news"
-                className="px-6 py-3 bg-white/10 text-white font-medium rounded-lg border border-white/30 hover:bg-white/20 transition backdrop-blur-sm"
+                className="hero-btn-secondary px-6 py-3 bg-white/10 text-white font-medium rounded-lg border border-white/30 backdrop-blur-sm"
               >
                 最新消息
               </Link>
             </div>
-          </AnimateOnScroll>
         </div>
       </section>
 
@@ -80,7 +88,7 @@ export default function HomePage() {
               主要服務重點
             </h2>
           </AnimateOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 min-w-0">
             <AnimateOnScroll animation="fade-up" delay={0}>
             <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition">
               <div className="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center mb-4 text-cyan-600">
@@ -133,14 +141,14 @@ export default function HomePage() {
             </h2>
           </AnimateOnScroll>
           {newsItems.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 min-w-0 items-stretch">
               {newsItems.map(({ slug, meta }, index) => (
-                <AnimateOnScroll key={slug} animation="fade-up" delay={index * 80}>
+                <AnimateOnScroll key={slug} animation="fade-up" delay={index * 80} className="h-full min-h-0">
                   <Link
                     href={`/news/${slug}`}
                     className="block bg-white rounded-xl border border-slate-100 hover:border-slate-200 hover:shadow-lg transition overflow-hidden h-full flex flex-col"
                   >
-                    <div className="aspect-[4/3] bg-slate-100 overflow-hidden">
+                    <div className="aspect-video bg-slate-100 overflow-hidden shrink-0">
                       {meta.image ? (
                         <Image
                           src={meta.image}
@@ -160,7 +168,7 @@ export default function HomePage() {
                         </div>
                       )}
                     </div>
-                    <div className="p-5 flex flex-col flex-1 min-h-[180px]">
+                    <div className="p-5 flex flex-col flex-1 min-h-[160px]">
                       <h3 className="text-base font-semibold text-slate-900 line-clamp-2 mb-2">
                         {meta.title}
                       </h3>
@@ -199,14 +207,14 @@ export default function HomePage() {
       <section className="w-full bg-slate-950 text-white">
         <Container className="py-16 md:py-20">
           <AnimateOnScroll animation="fade-up">
-          <div className="flex flex-col gap-10 md:grid md:grid-cols-2 md:items-center">
-            <div className="relative w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-800">
+          <div className="flex flex-col gap-8 sm:gap-10 md:grid md:grid-cols-2 md:items-center min-w-0">
+            <div className="relative w-full min-w-0 rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 aspect-video">
               <Image
                 src="/news/kank-landing.png"
                 alt="康科科技 KANK 模組化電動滑板車落地實績"
                 width={1024}
-                height={350}
-                className="w-full h-auto"
+                height={576}
+                className="w-full h-full object-cover"
                 priority
               />
             </div>

@@ -46,7 +46,7 @@ export default async function NewsSlugPage({ params }: NewsSlugPageProps) {
           >
             ← 返回最新消息
           </Link>
-          <article className="max-w-3xl">
+          <article className="max-w-3xl w-full min-w-0 overflow-hidden">
             <div className="prose prose-slate prose-img:rounded-lg">
               <MDXRemote source={post.content} components={mdxComponents} />
             </div>
