@@ -53,30 +53,30 @@ export default function HomePage() {
 
         <div className="relative z-10 w-full max-w-[1400px] min-w-0 px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 text-center">
           <h1 className="hero-title-animate text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 drop-shadow-lg" style={{ textShadow: "0 0 40px rgba(6,182,212,0.3)" }}>
-              EZeeTech
-            </h1>
-            <p className="hero-desc-1 text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed mb-4">
-              專注於車用電池系統之震動電能回收技術，
-              提供領先的車用應用驗證與試點解決方案。
-            </p>
-            <p className="hero-desc-2 text-slate-400 max-w-xl mx-auto text-sm sm:text-base mb-10">
-              與公部門及產業夥伴合作，透過實地測試、試點計畫與數據驗證，
-              讓創新技術真正落地、可評估、可擴展。
-            </p>
-            <div className="hero-buttons flex flex-wrap gap-4 justify-center">
-              <Link
-                href="/contact"
-                className="hero-btn-primary px-6 py-3 bg-cyan-500 text-white font-medium rounded-lg hover:bg-cyan-400 shadow-lg shadow-cyan-500/25"
-              >
-                聯絡我們
-              </Link>
-              <Link
-                href="/news"
-                className="hero-btn-secondary px-6 py-3 bg-white/10 text-white font-medium rounded-lg border border-white/30 backdrop-blur-sm"
-              >
-                最新消息
-              </Link>
-            </div>
+            EZeeTech
+          </h1>
+          <p className="hero-desc-1 text-lg sm:text-xl text-slate-200 max-w-2xl mx-auto leading-relaxed mb-4">
+            專注於車用電池系統之震動電能回收技術，
+            提供領先的車用應用驗證與試點解決方案。
+          </p>
+          <p className="hero-desc-2 text-slate-400 max-w-xl mx-auto text-sm sm:text-base mb-10">
+            與公部門及產業夥伴合作，透過實地測試、試點計畫與數據驗證，
+            讓創新技術真正落地、可評估、可擴展。
+          </p>
+          <div className="hero-buttons flex flex-wrap gap-4 justify-center">
+            <Link
+              href="/contact"
+              className="hero-btn-primary px-6 py-3 bg-cyan-500 text-white font-medium rounded-lg hover:bg-cyan-400 shadow-lg shadow-cyan-500/25"
+            >
+              聯絡我們
+            </Link>
+            <Link
+              href="/news"
+              className="hero-btn-secondary px-6 py-3 bg-white/10 text-white font-medium rounded-lg border border-white/30 backdrop-blur-sm"
+            >
+              最新消息
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -268,6 +268,17 @@ export default function HomePage() {
           </AnimateOnScroll>
         </Container>
       </section>
+
+      {/* 隱藏的管理員入口 */}
+      <div className="fixed bottom-4 right-4 z-50">
+        <Link
+          href="/admin"
+          className="text-slate-400 hover:text-slate-600 text-xs transition-colors duration-200"
+          aria-label="管理員登入"
+        >
+          Admin
+        </Link>
+      </div>
     </>
   );
 }
