@@ -23,7 +23,11 @@ ${message}
 
     const result = await resend.emails.send({
       from: "noreply@ezeetech.tw",
-      to: ["info@ezeetech.tw", "info.ezeetech.sustain@gmail.com"],
+      to: [
+        "info@ezeetech.tw",
+        "info.ezeetech.sustain@gmail.com",
+        "ezeetech.2025@gmail.com",
+      ],
       replyTo: email,
       subject: subject || "網站聯絡表單",
       text: emailContent,
