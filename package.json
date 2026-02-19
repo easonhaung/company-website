@@ -34,6 +34,8 @@
 
     "@supabase/supabase-js": "^2.97.0",
 
+    "dotenv": "^17.3.1",
+
     "gray-matter": "^4.0.3",
 
     "next": "16.1.6",
