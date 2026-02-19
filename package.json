@@ -10,29 +10,19 @@
 
     "dev": "next dev --hostname 127.0.0.1",
 
-    "dev:port": "next dev --hostname 127.0.0.1 --port 3001",
-
     "build": "next build",
 
     "start": "next start",
 
-    "lint": "eslint",
-
-    "backup-images": "npx tsx scripts/sync-images.ts backup",
-
-    "restore-images": "npx tsx scripts/sync-images.ts restore",
-
-    "clean-content": "npx tsx scripts/clean-all-content.ts clean"
+    "lint": "eslint"
 
   },
 
   "dependencies": {
 
-    "@supabase/auth-helpers-nextjs": "^0.15.0",
-
-    "@supabase/supabase-js": "^2.97.0",
-
     "dotenv": "^17.3.1",
+
+    "firebase": "^12.9.0",
 
     "gray-matter": "^4.0.3",
 
