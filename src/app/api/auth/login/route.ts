@@ -14,4 +14,5 @@ export async function GET() {
   return NextResponse.redirect(`https://github.com/login/oauth/authorize?${params.toString()}`);
 }
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
+
