@@ -1,74 +1,129 @@
-"use client";
-import { useState } from 'react';
+'use client'
 
-export default function AdminPage() {
-  const [title, setTitle] = useState('');
-  const [date, setDate] = useState('2025-01-01');
-  const [excerpt, setExcerpt] = useState('');
-  const [content, setContent] = useState('');
-  const [status, setStatus] = useState<string | null>(null);
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
-  async function handleLogin() {
-    window.location.href = '/api/auth/login';
+export default function AdminLoginPage() {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+  const router = useRouter()
+
+  useEffect(() => {
+    // 檢查是否已登入
+    checkAuthStatus()
+  }, [])
+
+  const checkAuthStatus = async () => {
+    try {
+      const response = await fetch('/api/auth/user')
+      if (response.ok) {
+        const userData = await response.json()
+        router.push('/admin/dashboard')
+      }
+    } catch (error) {
+      // 用戶未登入，繼續顯示登入表單
+    }
   }
 
-  async function handleSubmit(e: any) {
-    e.preventDefault();
-    const slug = title
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .trim()
-      .replace(/\s+/g, '-');
-    const filename = `${date}-${slug}.mdx`;
-    const mdx = `---\ntitle: "${title}"\ndate: "${date}"\ntype: "news"\nexcerpt: "${excerpt}"\n---\n\n${content}\n`;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setLoading(true)
+    setError('')
 
-    setStatus('Uploading...');
-    const res = await fetch('/api/admin/create-news', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ filename, content: mdx }),
-    });
-    const j = await res.json();
-    if (j.ok) setStatus('Created: ' + filename);
-    else setStatus('Error: ' + (j.message || JSON.stringify(j)));
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.success) {
+        router.push('/admin/dashboard')
+      } else {
+        setError(data.error || '登入失敗')
+      }
+    } catch (error) {
+      setError('網路錯誤，請重試')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
-    <div className="max-w-3xl mx-auto py-12">
-      <h1 className="text-2xl font-bold mb-4">Admin — 新聞管理</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div>
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            管理員登入
+          </h2>
+        </div>
+        
+        <div className="mt-8">
+          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded">
+                  {error}
+                </div>
+              )}
+              
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  電子郵件
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="admin@example.com"
+                  />
+                </div>
+              </div>
 
-      <p className="mb-4">若尚未登入，請先用 GitHub 帳號登入。</p>
-      <button onClick={handleLogin} className="px-4 py-2 bg-sky-600 text-white rounded">
-        使用 GitHub 登入
-      </button>
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                  密碼
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="•••••••••"
+                  />
+                </div>
+              </div>
 
-      <hr className="my-6" />
-
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label>標題</label>
-          <input className="w-full border p-2" value={title} onChange={(e) => setTitle(e.target.value)} />
+              <div>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+                >
+                  {loading ? '登入中...' : '登入'}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div>
-          <label>日期</label>
-          <input type="date" className="w-full border p-2" value={date} onChange={(e) => setDate(e.target.value)} />
-        </div>
-        <div>
-          <label>摘要</label>
-          <input className="w-full border p-2" value={excerpt} onChange={(e) => setExcerpt(e.target.value)} />
-        </div>
-        <div>
-          <label>內容（MDX）</label>
-          <textarea className="w-full border p-2 h-40" value={content} onChange={(e) => setContent(e.target.value)} />
-        </div>
-        <div>
-          <button className="px-4 py-2 bg-green-600 text-white rounded" type="submit">
-            建立新聞
-          </button>
-        </div>
-      </form>
-
-      {status && <p className="mt-4">{status}</p>}
+      </div>
     </div>
-  );
+  )
 }
