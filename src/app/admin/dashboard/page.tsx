@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { supabase } from '@/lib/supabase'
 
 interface User {
   id: string
@@ -16,21 +17,36 @@ export default function AdminDashboard() {
   const router = useRouter()
 
   useEffect(() => {
-    fetchUserData()
+    checkAuthStatus()
   }, [])
 
-  const fetchUserData = async () => {
+  const checkAuthStatus = async () => {
     try {
-      const response = await fetch('/api/auth/user')
+      const { data: { user } } = await supabase.auth.getUser()
       
-      if (response.ok) {
-        const userData = await response.json()
-        setUser(userData)
+      if (user) {
+        // 檢查是否為管理員
+        const { data, error } = await supabase
+          .from('admin_users')
+          .select('role')
+          .eq('user_id', user.id)
+          .single()
+        
+        if (error || !data) {
+          router.push('/admin')
+        } else {
+          setUser({
+            id: user.id,
+            email: user.email || '',
+            name: user.user_metadata?.name || user.email || '',
+            role: data.role as 'admin' | 'editor'
+          })
+        }
       } else {
         router.push('/admin')
       }
     } catch (error) {
-      console.error('獲取用戶資料失敗:', error)
+      console.error('認證檢查失敗:', error)
       router.push('/admin')
     } finally {
       setLoading(false)
@@ -39,7 +55,7 @@ export default function AdminDashboard() {
 
   const handleLogout = async () => {
     try {
-      await fetch('/api/auth/logout')
+      await supabase.auth.signOut()
       router.push('/admin')
     } catch (error) {
       console.error('登出失敗:', error)
