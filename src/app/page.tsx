@@ -88,7 +88,7 @@ export default function HomePage() {
               主要服務重點
             </h2>
           </AnimateOnScroll>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 min-w-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 min-w-0">
             <AnimateOnScroll animation="fade-up" delay={0}>
             <div className="bg-white rounded-xl p-6 shadow-sm border border-slate-100 hover:shadow-md transition">
               <div className="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center mb-4 text-cyan-600">

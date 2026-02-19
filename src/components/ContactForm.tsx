@@ -1,31 +1,62 @@
 "use client";
 
-import { useRef } from "react";
-
-const CONTACT_EMAIL = "info.ezeetech.sustain@gmail.com";
+import { useRef, useState } from "react";
 
 export function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState<{
+    type: "success" | "error";
+    text: string;
+  } | null>(null);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setIsLoading(true);
+    setMessage(null);
+
     const form = e.currentTarget;
     const formData = new FormData(form);
     const name = (formData.get("name") as string) || "";
     const email = (formData.get("email") as string) || "";
     const subject = (formData.get("subject") as string) || "";
-    const message = (formData.get("message") as string) || "";
+    const messageText = (formData.get("message") as string) || "";
 
-    const body = [
-      `姓名：${name}`,
-      `聯絡信箱：${email}`,
-      "",
-      "訊息內容：",
-      message,
-    ].join("\n");
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          subject,
+          message: messageText,
+        }),
+      });
 
-    const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject || "網站聯絡表單")}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Failed to send email");
+      }
+
+      setMessage({
+        type: "success",
+        text: "感謝您的訊息！我們會盡快回覆您。",
+      });
+      formRef.current?.reset();
+    } catch (error) {
+      setMessage({
+        type: "error",
+        text:
+          error instanceof Error
+            ? error.message
+            : "發送失敗，請稍後重試。",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -87,10 +118,22 @@ export function ContactForm() {
       </div>
       <button
         type="submit"
-        className="px-5 py-2.5 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition font-medium"
+        disabled={isLoading}
+        className="px-5 py-2.5 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition font-medium disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        送出
+        {isLoading ? "傳送中..." : "送出"}
       </button>
+      {message && (
+        <div
+          className={`p-3 rounded-lg text-sm ${
+            message.type === "success"
+              ? "bg-green-50 text-green-800 border border-green-200"
+              : "bg-red-50 text-red-800 border border-red-200"
+          }`}
+        >
+          {message.text}
+        </div>
+      )}
     </form>
   );
 }

@@ -1,5 +1,5 @@
 /**
- * 雙圖網格：兩張照片統一 4:3 比例、object-cover 填滿，保留圖片說明。
+ * 雙圖網格：兩張照片統一 16:9 比例、object-cover 填滿，保留圖片說明。
  * 適用於最新消息內有兩張照片的文章。
  */
 interface TwoPhotoGridProps {
@@ -20,13 +20,14 @@ export function TwoPhotoGrid({
   rightCaption,
 }: TwoPhotoGridProps) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4 min-w-0">
+    <div className="w-4/5 mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4 min-w-0">
       <figure className="m-0 min-w-0 overflow-hidden">
-        <div className="overflow-hidden rounded-lg aspect-[4/3] bg-slate-100">
+        <div className="overflow-hidden rounded-lg aspect-video bg-slate-100">
           <img
             src={leftSrc}
             alt={leftAlt}
-            className="w-full h-full object-cover rounded-lg"
+            className="w-full h-full object-cover object-bottom rounded-lg"
           />
         </div>
         <figcaption className="text-center text-slate-500 italic mt-2">
@@ -34,7 +35,7 @@ export function TwoPhotoGrid({
         </figcaption>
       </figure>
       <figure className="m-0 min-w-0 overflow-hidden">
-        <div className="overflow-hidden rounded-lg aspect-[4/3] bg-slate-100">
+        <div className="overflow-hidden rounded-lg aspect-video bg-slate-100">
           <img
             src={rightSrc}
             alt={rightAlt}
@@ -45,6 +46,7 @@ export function TwoPhotoGrid({
           {rightCaption}
         </figcaption>
       </figure>
+    </div>
     </div>
   );
 }

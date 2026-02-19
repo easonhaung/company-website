@@ -6,9 +6,9 @@
   }
   body {
     @apply text-gray-900 antialiased;
-    /* 中文／CJK 不斷在詞中斷行，減少「驗證能｜源」這類亂換行 */
-    word-break: keep-all;
-    overflow-wrap: normal;
+    /* 允許中文在適當位置斷行，充分利用頁面寬度 */
+    word-break: auto;
+    overflow-wrap: break-word;
     overflow-x: hidden;
   }
 }
@@ -16,8 +16,8 @@
 /* Typography for MDX content */
 .prose {
   @apply max-w-none overflow-hidden;
-  word-break: keep-all;
-  overflow-wrap: normal;
+  word-break: auto;
+  overflow-wrap: break-word;
 }
 
 .prose img,
@@ -37,6 +37,7 @@
 
 .prose p {
   @apply my-3 leading-relaxed;
+  word-break: auto;
 }
 
 .prose ul {
@@ -49,6 +50,12 @@
 
 .prose img {
   @apply block mx-auto my-6 max-w-full h-auto;
+}
+
+.prose figcaption {
+  word-break: keep-all;
+  hyphens: none;
+  overflow-wrap: normal;
 }
 
 /* Scroll-triggered animations (參考 2026 高雄創業投資 DEMO DAY 風格) */
