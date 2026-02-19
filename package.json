@@ -22,9 +22,7 @@
 
     "restore-images": "npx tsx scripts/sync-images.ts restore",
 
-    "clean-content": "npx tsx scripts/clean-all-content.ts clean",
-
-    "setup-supabase": "npx tsx scripts/setup-supabase.ts"
+    "clean-content": "npx tsx scripts/clean-all-content.ts clean"
 
   },
 
