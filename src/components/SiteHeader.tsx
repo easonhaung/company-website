@@ -1,8 +1,20 @@
+ "use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/Container";
 
 export function SiteHeader() {
+  const pathname = usePathname() || "/";
+
+  const isEnglish = pathname.startsWith("/en");
+  const zhPath = isEnglish ? pathname.slice(3) || "/" : pathname || "/";
+  const enPath =
+    isEnglish || pathname === "/"
+      ? pathname || "/en"
+      : `/en${pathname === "/" ? "" : pathname}`;
+
   return (
     <header className="border-b border-slate-200 bg-white">
       <Container className="py-4">
@@ -17,7 +29,7 @@ export function SiteHeader() {
               priority
             />
           </Link>
-          <ul className="flex flex-wrap gap-4 sm:gap-6 text-sm text-slate-600">
+          <ul className="flex flex-wrap items-center gap-4 sm:gap-6 text-sm text-slate-600">
             <li>
               <Link href="/" className="hover:text-slate-900">
                 首頁
@@ -47,6 +59,33 @@ export function SiteHeader() {
               <Link href="/contact" className="hover:text-slate-900">
                 聯絡我們
               </Link>
+            </li>
+            <li>
+              <div className="h-5 w-px bg-slate-200 mx-1" aria-hidden />
+            </li>
+            <li>
+              <div className="flex items-center gap-1 text-xs sm:text-sm">
+                <Link
+                  href={zhPath}
+                  className={`px-2 py-1 rounded-full border ${
+                    !isEnglish
+                      ? "bg-slate-900 text-white border-slate-900"
+                      : "border-slate-300 text-slate-600 hover:bg-slate-100"
+                  }`}
+                >
+                  繁中
+                </Link>
+                <Link
+                  href={enPath}
+                  className={`px-2 py-1 rounded-full border ${
+                    isEnglish
+                      ? "bg-slate-900 text-white border-slate-900"
+                      : "border-slate-300 text-slate-600 hover:bg-slate-100"
+                  }`}
+                >
+                  EN
+                </Link>
+              </div>
             </li>
           </ul>
         </nav>
