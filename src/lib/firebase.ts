@@ -1,82 +1,95 @@
-import { initializeApp } from 'firebase/app'
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged as firebaseOnAuthStateChanged } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+// src/lib/firebase.ts
+import { initializeApp, getApp, getApps, type FirebaseApp } from 'firebase/app'
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged as firebaseOnAuthStateChanged,
+  type Auth
+} from 'firebase/auth'
+import { getFirestore, type Firestore } from 'firebase/firestore'
 
-// Firebase 配置
-const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
+type FirebaseWebConfig = {
+  apiKey: string
+  authDomain: string
+  projectId: string
+  storageBucket?: string
+  messagingSenderId?: string
+  appId: string
+  measurementId?: string
 }
 
-function assertFirebaseClientConfig() {
-  const missingKeys: string[] = []
+function getFirebaseWebConfig(): FirebaseWebConfig {
+  const apiKey = process.env.NEXT_PUBLIC_FIREBASE_API_KEY
+  const authDomain = process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
+  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
+  const appId = process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 
-  if (!firebaseConfig.apiKey) missingKeys.push('NEXT_PUBLIC_FIREBASE_API_KEY')
-  if (!firebaseConfig.authDomain) missingKeys.push('NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN')
-  if (!firebaseConfig.projectId) missingKeys.push('NEXT_PUBLIC_FIREBASE_PROJECT_ID')
-  if (!firebaseConfig.appId) missingKeys.push('NEXT_PUBLIC_FIREBASE_APP_ID')
+  const missing: string[] = []
+  if (!apiKey) missing.push('NEXT_PUBLIC_FIREBASE_API_KEY')
+  if (!authDomain) missing.push('NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN')
+  if (!projectId) missing.push('NEXT_PUBLIC_FIREBASE_PROJECT_ID')
+  if (!appId) missing.push('NEXT_PUBLIC_FIREBASE_APP_ID')
 
-  if (missingKeys.length > 0) {
+  if (missing.length) {
     throw new Error(
-      `Firebase env is missing: ${missingKeys.join(', ')}. ` +
-        `Check your .env.local and restart \"npm run dev\".`
+      `Firebase env is missing: ${missing.join(', ')}. ` +
+        `Check your .env.local (project root) and restart "npm run dev".`
     )
+  }
+
+  return {
+    apiKey: apiKey as string,
+    authDomain: authDomain as string,
+    projectId: projectId as string,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: appId as string,
+    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
   }
 }
 
-// 初始化 Firebase
-const app = initializeApp(firebaseConfig)
-const db = getFirestore(app)
-
-let auth: ReturnType<typeof getAuth> | null = null
+let app: FirebaseApp | null = null
+let db: Firestore | null = null
+let auth: Auth | null = null
 let googleProvider: GoogleAuthProvider | null = null
+
+export function getFirebaseApp() {
+  if (!app) {
+    const config = getFirebaseWebConfig()
+    app = getApps().length ? getApp() : initializeApp(config)
+  }
+  return app
+}
+
+export function getDb() {
+  if (!db) db = getFirestore(getFirebaseApp())
+  return db
+}
 
 function getClientAuth() {
   if (typeof window === 'undefined') {
     throw new Error('Firebase Auth is only available in the browser')
   }
-
-  assertFirebaseClientConfig()
-
-  if (!auth) {
-    auth = getAuth(app)
-  }
-
+  if (!auth) auth = getAuth(getFirebaseApp())
   return auth
 }
 
 function getGoogleProvider() {
-  if (!googleProvider) {
-    googleProvider = new GoogleAuthProvider()
-  }
-
+  if (!googleProvider) googleProvider = new GoogleAuthProvider()
   return googleProvider
 }
 
 // Google 登入
 export async function signInWithGoogle() {
-  try {
-    const result = await signInWithPopup(getClientAuth(), getGoogleProvider())
-    return result.user
-  } catch (error) {
-    console.error('Google 登入失敗:', error)
-    throw error
-  }
+  const result = await signInWithPopup(getClientAuth(), getGoogleProvider())
+  return result.user
 }
 
 // 登出
 export async function signOutUser() {
-  try {
-    await signOut(getClientAuth())
-  } catch (error) {
-    console.error('登出失敗:', error)
-    throw error
-  }
+  await signOut(getClientAuth())
 }
 
 // 監聽認證狀態
@@ -93,5 +106,6 @@ export function getCurrentUser() {
   }
 }
 
-export { db }
-export default app
+// 兼容你原本用法：export { db }
+export const dbCompat = () => getDb()
+export default getFirebaseApp
