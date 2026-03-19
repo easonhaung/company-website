@@ -5,8 +5,7 @@
 /* PROJECT9 字體定義 */
 @font-face {
   font-family: 'PROJECT9';
-  src: url('/fonts/PROJECT9.woff2') format('woff2'),
-       url('/fonts/PROJECT9.woff') format('woff');
+  src: url('/fonts/PROJECT9.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
