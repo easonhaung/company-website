@@ -56,7 +56,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* 左側文字內容 */}
             <div className="text-left">
-              <h1 className="hero-title-animate text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 drop-shadow-lg" style={{ textShadow: "0 0 40px rgba(6,182,212,0.3)" }}>
+              <h1 className="hero-title-animate text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 drop-shadow-lg" style={{ fontFamily: 'PROJECT9, sans-serif', textShadow: "0 0 40px rgba(6,182,212,0.3)" }}>
                 EZeeTech
               </h1>
               <p className="hero-desc-1 text-lg sm:text-xl text-slate-200 max-w-2xl leading-relaxed mb-4">

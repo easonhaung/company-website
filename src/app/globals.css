@@ -2,6 +2,16 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* PROJECT9 字體定義 */
+@font-face {
+  font-family: 'PROJECT9';
+  src: url('/fonts/PROJECT9.woff2') format('woff2'),
+       url('/fonts/PROJECT9.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @layer base {
