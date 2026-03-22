@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero: 全寬、16:9 比例、科技風背景 */}
-      <section className="relative w-full aspect-[16/7] min-h-[50vh] sm:min-h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative w-full aspect-[16/7] md:aspect-[16/6] min-h-[40vh] sm:min-h-[50vh] md:min-h-[60vh] flex items-center justify-center overflow-hidden">
         {/* 背景圖：科技感 */}
         <div className="absolute inset-0 bg-slate-950">
           <div className="relative w-full h-full">
@@ -56,7 +56,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* 左側文字內容 */}
             <div className="text-left">
-              <h1 className="hero-title-animate text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-6 drop-shadow-lg" style={{ fontFamily: 'PROJECT9, sans-serif', textShadow: "0 0 40px rgba(6,182,212,0.3)" }}>
+              <h1 className="hero-title-animate text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight mb-6 drop-shadow-lg" style={{ fontFamily: 'PROJECT9, sans-serif', textShadow: "0 0 40px rgba(6,182,212,0.3)" }}>
                 EZeeTech
               </h1>
               <p className="hero-desc-1 text-lg sm:text-xl text-slate-200 max-w-2xl leading-relaxed mb-4">
@@ -67,16 +67,16 @@ export default function HomePage() {
                 與公部門及產業夥伴合作，透過實地測試、試點計畫與數據驗證，
                 讓創新技術真正落地、可評估、可擴展。
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link
                   href="/contact"
-                  className="hero-btn-primary px-6 py-3 bg-cyan-500 text-white font-medium rounded-lg hover:bg-cyan-400 shadow-lg shadow-cyan-500/25"
+                  className="hero-btn-primary w-full sm:w-auto px-6 py-3 bg-cyan-500 text-white font-medium rounded-lg hover:bg-cyan-400 shadow-lg shadow-cyan-500/25 text-center"
                 >
                   聯絡我們
                 </Link>
                 <Link
                   href="/news"
-                  className="hero-btn-secondary px-6 py-3 bg-white/10 text-white font-medium rounded-lg border border-white/30 backdrop-blur-sm"
+                  className="hero-btn-secondary w-full sm:w-auto px-6 py-3 bg-white/10 text-white font-medium rounded-lg border border-white/30 backdrop-blur-sm text-center"
                 >
                   最新消息
                 </Link>
