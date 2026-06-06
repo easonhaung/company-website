@@ -23,7 +23,7 @@ export function TwoPhotoGrid({
     <div className="w-4/5 mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4 min-w-0">
       <figure className="m-0 min-w-0 overflow-hidden">
-        <div className="overflow-hidden rounded-lg aspect-video bg-slate-100">
+        <div className="overflow-hidden rounded-lg aspect-[4/3] bg-slate-100">
           <img
             src={leftSrc}
             alt={leftAlt}
@@ -35,7 +35,7 @@ export function TwoPhotoGrid({
         </figcaption>
       </figure>
       <figure className="m-0 min-w-0 overflow-hidden">
-        <div className="overflow-hidden rounded-lg aspect-video bg-slate-100">
+        <div className="overflow-hidden rounded-lg aspect-[4/3] bg-slate-100">
           <img
             src={rightSrc}
             alt={rightAlt}
