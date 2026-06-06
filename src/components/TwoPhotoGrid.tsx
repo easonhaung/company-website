@@ -27,7 +27,7 @@ export function TwoPhotoGrid({
           <img
             src={leftSrc}
             alt={leftAlt}
-            className="w-full h-full object-cover object-bottom rounded-lg"
+            className="w-full h-full object-cover object-center rounded-lg"
           />
         </div>
         <figcaption className="text-center text-slate-500 italic mt-2">
@@ -39,7 +39,7 @@ export function TwoPhotoGrid({
           <img
             src={rightSrc}
             alt={rightAlt}
-            className="w-full h-full object-cover rounded-lg"
+            className="w-full h-full object-cover object-center rounded-lg"
           />
         </div>
         <figcaption className="text-center text-slate-500 italic mt-2">
