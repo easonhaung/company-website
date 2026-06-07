@@ -28,6 +28,7 @@ export function TwoPhotoGrid({
             src={leftSrc}
             alt={leftAlt}
             className="w-full h-full object-cover object-center rounded-lg"
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
         <figcaption className="text-center text-slate-500 italic mt-2">
@@ -40,6 +41,7 @@ export function TwoPhotoGrid({
             src={rightSrc}
             alt={rightAlt}
             className="w-full h-full object-cover object-center rounded-lg"
+            style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
         <figcaption className="text-center text-slate-500 italic mt-2">
