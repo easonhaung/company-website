@@ -20,7 +20,7 @@ export function TwoPhotoGrid({
   rightCaption,
 }: TwoPhotoGridProps) {
   return (
-    <div className="w-3/5 mx-auto">
+    <div className="w-4/5 mx-auto">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4 min-w-0">
       <figure className="m-0 min-w-0 overflow-hidden">
         <div className="overflow-hidden rounded-lg aspect-[4/3] bg-slate-100">
@@ -28,7 +28,6 @@ export function TwoPhotoGrid({
             src={leftSrc}
             alt={leftAlt}
             className="w-full h-full object-cover object-center rounded-lg"
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
           />
         </div>
         <figcaption className="text-center text-slate-500 italic mt-2">
@@ -40,8 +39,7 @@ export function TwoPhotoGrid({
           <img
             src={rightSrc}
             alt={rightAlt}
-            className="w-full h-full object-cover object-bottom rounded-lg"
-            style={{ objectFit: 'cover', objectPosition: 'bottom' }}
+            className="w-full h-full object-cover object-center rounded-lg"
           />
         </div>
         <figcaption className="text-center text-slate-500 italic mt-2">
