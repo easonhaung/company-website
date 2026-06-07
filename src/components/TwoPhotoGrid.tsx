@@ -40,8 +40,8 @@ export function TwoPhotoGrid({
           <img
             src={rightSrc}
             alt={rightAlt}
-            className="w-full h-full object-cover object-center rounded-lg"
-            style={{ objectFit: 'cover', objectPosition: 'center' }}
+            className="w-full h-full object-cover object-bottom rounded-lg"
+            style={{ objectFit: 'cover', objectPosition: 'bottom' }}
           />
         </div>
         <figcaption className="text-center text-slate-500 italic mt-2">
