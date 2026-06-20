@@ -26,7 +26,7 @@ export default function ContactPage() {
                   href="mailto:info.ezeetech.sustain@gmail.com"
                   className="text-cyan-600 hover:underline font-medium break-all"
                 >
-                  info.ezeetech.sustain@gmail.com
+                  info@ezeetech.tw
                 </a>
               </div>
               <div>
