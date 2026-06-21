@@ -1,3 +1,6 @@
+/* Google Fonts - Noto Sans TC for Chinese */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -16,7 +19,7 @@
 @layer base {
   html {
     overflow-x: hidden;
-    @apply font-sans;
+    font-family: 'Noto Sans TC', system-ui, -apple-system, sans-serif;
   }
   body {
     @apply antialiased bg-background text-foreground;
