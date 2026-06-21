@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   description:
     "EZeeTech 致力於協助行動載具與基礎建設相關夥伴，將新世代能源技術從概念驗證推進至實際部署。",
   icons: {
-    icon: "/favicon.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/news/EZeeTech.png",
+    apple: "/news/EZeeTech.png",
   },
 };
 
